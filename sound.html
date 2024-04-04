@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animal World</title>
+<style>
+    /* CSS styles */
+    .animal {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+</style>
+</head>
+<body>
+<div id="output"></div>
+
+<script>
+// Define Animal class with abstraction and encapsulation
+class Animal {
+    constructor(name, sound, age, weight) {
+        this.name = name;
+        this.sound = sound;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    // Abstract method for making sound
+    makeSound() {
+        return this.name + ' says ' + this.sound;
+    }
+
+    // Abstract method for eating
+    eat(food) {
+        return this.name + ' is eating ' + food + '.';
+    }
+
+    // Abstract method for moving
+    move() {
+        throw new Error('Abstract method move() must be implemented');
+    }
+
+    // Method to age the animal
+    growOlder(years) {
+        this.age += years;
+        return this.name + ' is now ' + this.age + ' years old.';
+    }
+
+    // Method to increase weight
+    gainWeight(amount) {
+        this.weight += amount;
+        return this.name + ' gained ' + amount + ' kg and now weighs ' + this.weight + ' kg.';
+    }
+
+    // Method for animals to interact
+    interact(animal) {
+        return this.name + ' interacts with ' + animal.name + '.';
+    }
+}
+
+// Define Herbivore class inheriting from Animal
+class Herbivore extends Animal {
+    constructor(name, sound, age, weight) {
+        super(name, sound, age, weight);
+    }
+
+    // Implementing move method for Herbivores
+    move() {
+        return this.name + ' is grazing.';
+    }
+}
+
+// Define Carnivore class inheriting from Animal
+class Carnivore extends Animal {
+    constructor(name, sound, age, weight) {
+        super(name, sound, age, weight);
+    }
+
+    // Implementing move method for Carnivores
+    move() {
+        return this.name + ' is hunting.';
+    }
+
+    // Custom method for hunting
+    hunt(prey) {
+        return this.name + ' hunts ' + prey + '.';
+    }
+}
+
+// Define Omnivore class inheriting from Animal
+class Omnivore extends Animal {
+    constructor(name, sound, age, weight) {
+        super(name, sound, age, weight);
+    }
+
+    // Implementing move method for Omnivores
+    move() {
+        return this.name + ' is searching for food.';
+    }
+}
+
+// Function to create an animal based on user input
+function createAnimal() {
+    const name = prompt('Enter animal name:');
+    const sound = prompt('Enter the sound it makes:');
+    const age = parseInt(prompt('Enter its age:'));
+    const weight = parseFloat(prompt('Enter its weight in kg:'));
+    const type = prompt('Enter animal type (herbivore, carnivore, or omnivore):').toLowerCase();
+
+    switch (type) {
+        case 'herbivore':
+            return new Herbivore(name, sound, age, weight);
+        case 'carnivore':
+            return new Carnivore(name, sound, age, weight);
+        case 'omnivore':
+            return new Omnivore(name, sound, age, weight);
+        default:
+            alert('Invalid animal type. Creating a generic animal.');
+            return new Animal(name, sound,age,weight);
+    }
+}
+</script>
+</body>
+</html>
